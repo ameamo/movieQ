@@ -10,7 +10,16 @@
     </head> 
     <x-app-layout>
         <body>
-            <h1>ホームページになる</h1>
+            <div class="question_index">
+                @foreach($questions as $question)
+                    <h1>
+                        <a href="/questions/{{ $question->id }}">{{ $question->movie_title }}</a>
+                    </h1>
+                    <p>{{ $question->body }}</p><br>
+                @endforeach
+            </div>
+                
+            
         </body>
     </x-app-layout>
 </html>
