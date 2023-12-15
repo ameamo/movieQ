@@ -9,6 +9,11 @@ use App\Http\Requests\QuestionRequest;
 
 class QuestionController extends Controller
 {
+    public function homepage (Question $question)
+    {
+        return view('Q&A.home')->with(['questions' => $question->get()]);
+    }
+    
     public function create () 
     {
         return view('Q&A.question-creation-search');
@@ -60,6 +65,11 @@ class QuestionController extends Controller
         $question->body = $input["body"];
         $question->save();
         return redirect('/questions/' . $question->id);
-        
+    }
+    
+    public function delete (Question $question)
+    {
+        $question->delete();
+        return redirect('/');
     }
 }

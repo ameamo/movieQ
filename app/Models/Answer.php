@@ -5,22 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Question extends Model
+class Answer extends Model
 {
     use HasFactory;
+    const UPDATED_AT = null;
+    
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
-    public function answers()
+    public function question()
     {
-        return $this->hasMany(Answer::class);
+        return $this->belongsTo(Question::class);
     }
+    
     
     protected $fillable = [
         'user_id',
-        'movie_title',
+        'question_id',
         'body',
     ];
 }
