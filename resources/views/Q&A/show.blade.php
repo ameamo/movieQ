@@ -35,8 +35,8 @@
             <div class="answer_input">
                 <form action="/answer" method="POST">
                     @csrf
-                    <input type="hidden" name="answer[user_id]" value="{{ auth()->check() ? auth()->user()->id : null }}">
-                    <input type="hidden" name="answer[question_id]" value="{{ $question->id }}">
+                    <input type="hidden" name="answer[user_id]" value="{{ auth()->check() ? auth()->user()->id : null }}"/>
+                    <input type="hidden" name="answer[question_id]" value="{{ $question->id }}"/>
                     <textarea name="answer[body]" placeholder="enter your answer.">{{ old('answer.body') }}</textarea>
                     <p class="body__error", style="color:red">{{ $errors->first('answer.body') }}</p>
                     <input type="submit" value="投稿する"/>
@@ -47,6 +47,23 @@
                 @foreach($question->answers as $eachAnswer)
                     <h2>ユーザー名：{{ $eachAnswer->user->name }}</h2>
                     <p>{{ $eachAnswer->body }}</p><br>
+                    <div class="replies">
+                        <button class="replyButton"><h1 id="hensin">返信∨</h1></button>
+                            <div class="replyBody">
+                                <form action="/reply" method="POST">
+                                    @csrf
+                                    <input type="text" name="reply[body]" value="{{ old('reply.body') }}"/>
+                                    <p class="body__error", style="color:red">{{ $errors->first('reply.body') }}</p>
+                                    <input type="hidden" name="reply[user_id]" value="{{ auth()->check() ? auth()->user()->id : null }}"/>
+                                    <input type="hidden" name="reply[answer_id]" value="{{ $eachAnswer->id }}">
+                                    <input type="submit" value="投稿する"/>
+                                </form>
+                                @foreach($eachAnswer->replies as $eachReply)
+                                    <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ユーザー名：{{ $eachReply->user->name }}</h1>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $eachReply->body }}</p><br>
+                                @endforeach
+                            </div>
+                    </div><br>
                 @endforeach
             </div>
             <script>
@@ -57,6 +74,31 @@
                         document.getElementById(`form_${id}`) .submit();
                     }
                 }
+                
+                document.addEventListener('DOMContentLoaded', function () {
+                    const replyButtons = document.querySelectorAll('.replyButton');
+                    const replyBodies = document.querySelectorAll('.replyBody');
+                    
+                    replyBodies.forEach(function(replyBody) {
+                        replyBody.style.display = 'none';
+                    });
+                    
+                    replyButtons.forEach(function (replyButton, index) {
+                        replyButton.addEventListener('click', function () {
+                            // 現在の表示状態を取得
+                            const currentDisplay = replyBodies[index].style.display;
+                            
+                            // 現在の表示状態に応じて切り替え
+                            if (currentDisplay === 'none' || currentDisplay === '') {
+                                replyBodies[index].style.display = 'block';
+                            } else {
+                                replyBodies[index].style.display = 'none';
+                            }
+                        });
+                    });
+                });
+                    
+                    
                     
             </script>
         </body>
