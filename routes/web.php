@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\ReplyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,8 @@ Route::controller(QuestionController::class)->middleware(['auth'])->group(functi
 });
 
 Route::post('/answer', [AnswerController::class, 'answer']);
+
+Route::post('/reply', [ReplyController::class, 'reply']);
 
 
 Route::middleware('auth')->group(function () {

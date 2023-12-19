@@ -18,6 +18,10 @@ class Answer extends Model
     {
         return $this->belongsTo(Question::class);
     }
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
     
     
     protected $fillable = [
