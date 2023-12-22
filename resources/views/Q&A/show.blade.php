@@ -26,11 +26,13 @@
                 @endif
             </div>
             <div class="delete">
-                <form action="/questions/{{ $question->id }}" id="form_{{ $question->id }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button type="button" onclick="deleteQuestion({{ $question->id }})">delete</button>
-                </form><br>
+                @if(Auth::check() && Auth::user()->id == $question->user->id)
+                    <form action="/questions/{{ $question->id }}" id="form_{{ $question->id }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" onclick="deleteQuestion({{ $question->id }})">delete</button>
+                    </form><br>
+                @endif
             </div>
             <div class="answer_input">
                 <form action="/answer" method="POST">

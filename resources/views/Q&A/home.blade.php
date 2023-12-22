@@ -13,10 +13,16 @@
             <div class="question_index">
                 @foreach($questions as $question)
                     <h1>
-                        <a href="/questions/{{ $question->id }}">{{ $question->movie_title }}</a>
+                        <a href="/questions/{{ $question->id }}">
+                            {{ $question->movie_title }}<br>
+                            {{ \Illuminate\Support\Str::limit($question->body, 80) }}
+                        </a>
                     </h1>
-                    <p>{{ $question->body }}</p><br>
+                    <br>
                 @endforeach
+            </div>
+            <div class="paginate">
+                {{ $questions->links() }}
             </div>
                 
             
