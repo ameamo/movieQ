@@ -11,7 +11,7 @@ class QuestionController extends Controller
 {
     public function homepage (Question $question)
     {
-        return view('Q&A.home')->with(['questions' => $question->get()]);
+        return view('Q&A.home')->with(['questions' => $question->getPaginateByLimit()]);
     }
     
     public function create () 
