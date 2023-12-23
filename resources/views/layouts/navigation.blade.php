@@ -16,6 +16,9 @@
                     <x-nav-link :href="route('create')" :active="request()->routeIs('create')">
                         {{ __('質問する') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('mypage')" :active="request()->routeIs('mypage')">
+                        {{ __('マイページ') }}
+                    </x-nav-link>
                 </div>
             </div>
 

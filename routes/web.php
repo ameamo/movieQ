@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\MypageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,12 @@ Route::controller(QuestionController::class)->middleware(['auth'])->group(functi
 Route::post('/answer', [AnswerController::class, 'answer']);
 
 Route::post('/reply', [ReplyController::class, 'reply']);
+
+Route::controller(MypageController::class)->middleware(['auth'])->group(function(){
+    Route::get('/mypage', 'mypage')->name('mypage');
+    Route::get('/mypage/questions', 'questions')->name('questions');
+    Route::get('/mypage/answers', 'answers')->name('answers');
+});
 
 
 Route::middleware('auth')->group(function () {
