@@ -26,6 +26,8 @@ Route::get('/dashboard', function () {
 Route::controller(QuestionController::class)->middleware(['auth'])->group(function(){
     Route::get('/', 'homepage')->name('homepage');
     Route::get('/search', 'search')->name('search');
+    Route::get('/searchQuestions', 'searchQuestions')->name('searchQuestions');
+    Route::get('/lists/{title}', 'lists')->name('lists');
     Route::get('/input/{str}', 'input')->name('input');
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
