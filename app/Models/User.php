@@ -23,6 +23,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reply::class);
     }
+    public function answernotifications()
+    {
+        return $this->hasMany(AnswerNotification::class);
+    }
+    public function replynotifications()
+    {
+        return $this->hasMany(ReplyNotification::class);
+    }
 
     /**
      * The attributes that are mass assignable.

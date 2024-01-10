@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reply extends Model
+class AnswerNotification extends Model
 {
     use HasFactory;
     const UPDATED_AT = null;
-    
-    public function user()
+
+    public function user() 
     {
         return $this->belongsTo(User::class);
     }
@@ -18,8 +18,13 @@ class Reply extends Model
     {
         return $this->belongsTo(Answer::class);
     }
-    public function notification()
+    public function reply()
     {
-        return $this->hasOne(Notification::class);
+        return $this->belongsTo(Reply::class);
     }
+    
+    protected $fillable = [
+        'user_id',
+        'answer_id',
+    ];
 }
