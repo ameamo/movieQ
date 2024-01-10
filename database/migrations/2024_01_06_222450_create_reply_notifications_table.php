@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('reply_notifications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('question_id')->constrained();
-            $table->foreignId('answer_id')->constrained();
             $table->foreignId('reply_id')->constrained();
-            $table->string('notification_message', 200);
+            $table->boolean('read')->default(false);
             $table->timestamps();
             $table->dropColumn('updated_at');
             //MODELクラスでconst UPDATED_AT = null;を追加
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('reply_notifications');
     }
 };

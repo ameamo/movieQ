@@ -5,6 +5,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\MypageController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,12 @@ Route::controller(MypageController::class)->middleware(['auth'])->group(function
     Route::get('/mypage', 'mypage')->name('mypage');
     Route::get('/mypage/questions', 'questions')->name('questions');
     Route::get('/mypage/answers', 'answers')->name('answers');
+});
+
+Route::controller(NotificationController::class)->group(function() {
+    Route::get('/notification', 'notification')->name('notification');
+    Route::get('/answer_read/{answerNotification}', 'answer_read')->name('answer_read');
+    Route::get('/reply_read/{replyNotification}', 'reply_read')->name('reply_read');
 });
 
 

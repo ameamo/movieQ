@@ -22,6 +22,10 @@ class Answer extends Model
     {
         return $this->hasMany(Reply::class);
     }
+    public function answernotification()
+    {
+        return $this->hasOne(AnswerNotification::class);
+    }
     
     
     protected $fillable = [
@@ -29,4 +33,21 @@ class Answer extends Model
         'question_id',
         'body',
     ];
+    
+    /*answerモデルが保存されたときにnotificationsテーブルに情報を保存
+    protected static function boot()
+    {
+        parent::boot();
+        static::created(function ($answer) {
+            $answer->createNotification();
+        });
+    }
+    public function createNotification()
+    {
+        $notificationData = [
+            'user_id' => $this->question->user_id,
+            'answer_id' => $this->id,
+        ];
+        Notification::create($notificationData);
+    }*/
 }

@@ -19,6 +19,9 @@
                     <x-nav-link :href="route('mypage')" :active="request()->routeIs('mypage')">
                         {{ __('マイページ') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('notification')" :active="request()->routeIs('notification')">
+                        {{ __('🔔') }}
+                    </x-nav-link>
                 </div>
             </div>
 

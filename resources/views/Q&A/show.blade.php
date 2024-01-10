@@ -47,6 +47,7 @@
             <div class="answers">
                 <h1>Answer</h1><br>
                 @foreach($question->answers as $eachAnswer)
+                    <p>{{ $eachAnswer->created_at }}</p>
                     <h2>ユーザー名：{{ $eachAnswer->user->name }}</h2>
                     <p>{{ $eachAnswer->body }}</p><br>
                     <div class="replies">
